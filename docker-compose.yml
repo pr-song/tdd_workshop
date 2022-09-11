@@ -1,0 +1,26 @@
+version: '3.9'
+
+networks:
+  nginx-php-internal:
+    driver: bridge
+
+services:
+  nginx:
+    build: 
+      context: ./nginx/
+      dockerfile: Dockerfile
+    networks:
+      - nginx-php-internal
+    ports:
+      - "8000:80"
+    volumes:
+      - ./src/:/var/www/html/
+      - ./logs/nginx:/var/log/nginx/
+  php:
+    build:
+      context: ./php/
+      dockerfile: Dockerfile
+    networks:
+      - nginx-php-internal
+    volumes:
+      - ./src/:/var/www/html/

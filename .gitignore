@@ -1,0 +1,6 @@
+logs/*
+src/vendor/*
+.idea/
+src/.env
+src/tests/data/*
+src/logs/*
