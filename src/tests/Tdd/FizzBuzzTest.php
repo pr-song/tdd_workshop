@@ -13,54 +13,88 @@ class FizzBuzzTest extends TestCase
         $this->fizzbuzz = new FizzBuzz();
     }
 
-    public function testReturnStringOf1WhenPassingNumberOf1()
+    /**
+     * @dataProvider provideDataForReturnFizzWhenPassingMultipleOf3
+     * @return void
+     */
+    public function testReturnFizzWhenPassingMultipleOf3($number)
     {
         // 検証と実装
-        $this->assertEquals("1", $this->fizzbuzz->convertNumberToString(1));
+        $this->assertEquals("Fizz", $this->fizzbuzz->convertNumberToString($number));
     }
 
-    public function testReturnStringOf2WhenPassingNumberOf2()
+    /**
+     * @dataProvider provideDataForReturnBuzzWhenPassingMultipleOf5
+     * @return void
+     */
+    public function testReturnBuzzWhenPassingMultipleOf5($number)
     {
-        // 検証と実装
-        $this->assertEquals("2", $this->fizzbuzz->convertNumberToString(2));
+        $this->assertEquals('Buzz', $this->fizzbuzz->convertNumberToString($number));
     }
 
-    public function testReturnFizzWhenPassingNumberOf3()
-    {
-        // 検証と実装
-        $this->assertEquals("Fizz", $this->fizzbuzz->convertNumberToString(3));
-    }
-
-    public function testReturnFizzWhenPassingMultipleOf3()
-    {
-        $this->assertEquals("Fizz", $this->fizzbuzz->convertNumberToString(6));
-    }
-
-    public function testReturnBuzzWhenPassingNumberOf5()
-    {
-        // 検証と実装
-        $this->assertEquals("Buzz", $this->fizzbuzz->convertNumberToString(5));
-    }
-
-    public function testReturnBuzzWhenPassingMultipleOf5()
-    {
-        $this->assertEquals("Buzz", $this->fizzbuzz->convertNumberToString(10));
-    }
-
-    public function testReturnFizzBuzzWhenPassingNumberOf15()
-    {
-        // 検証と実装
-        $this->assertEquals("FizzBuzz", $this->fizzbuzz->convertNumberToString(15));
-    }
-
+    /**
+     * @dataProvider provideDataForReturnFizzBuzzWhenPassingMultipleOf3And5
+     * @return void
+     */
     public function testReturnFizzBuzzWhenPassingMultipleOf3And5()
     {
         $this->assertEquals("FizzBuzz", $this->fizzbuzz->convertNumberToString(30));
     }
 
-    public function testReturnStringOfNumberWhenPassingOtherNumber()
+    /**
+     * @dataProvider provideDataForReturnStringOfNumberWhenPassingOtherNumber
+     * @return void
+     */
+    public function testReturnStringOfNumberWhenPassingOtherNumber($number)
     {
-        $this->assertEquals("4", $this->fizzbuzz->convertNumberToString(4));
+        $this->assertEquals((string)$number, $this->fizzbuzz->convertNumberToString($number));
+    }
 
+    public function provideDataForReturnFizzWhenPassingMultipleOf3():array
+    {
+        return [
+            [
+                'number' => 3,
+            ],
+            [
+                'number' => 6,
+            ]
+        ];
+    }
+
+    public function provideDataForReturnBuzzWhenPassingMultipleOf5(): array
+    {
+        return [
+            [
+                'number' => 5,
+            ],
+            [
+                'number' => 10,
+            ]
+        ];
+    }
+
+    public function provideDataForReturnFizzBuzzWhenPassingMultipleOf3And5(): array
+    {
+        return [
+            [
+                'number' => 15,
+            ],
+            [
+                'number' => 30,
+            ]
+        ];
+    }
+
+    public function provideDataForReturnStringOfNumberWhenPassingOtherNumber(): array
+    {
+        return [
+            [
+                'number' => 1
+            ],
+            [
+                'number' => 2
+            ]
+        ];
     }
 }
